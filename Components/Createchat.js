@@ -14,8 +14,14 @@ export default function Createchat() {
     const [name, setName] = useState([]);
     const [users, setUsers] = useState([]);
 
-    const [followerIDs, setFollowerIDs] = useState('');
-    const [followerNames, setFollowerNames] = useState('');
+    const [followerIDs, setFollowerIDs] = useState([]);
+    const [followerNames, setFollowerNames] = useState([]);
+
+    const [memberOne, setMemberOne] = useState([]);
+    const [memberTwo, setMemberTwo] = useState([]);
+    const [memberThree, setMemberThree] = useState([]);
+    const [memberFour, setMemberFour] = useState([]); 
+    const [memberFive, setMemberFive] = useState([]);
 
     const followerArray = []
     const followerNameArray = []
@@ -74,13 +80,14 @@ export default function Createchat() {
 useEffect(() => {
    
   getFollowerIds();
+  getFollowerNames();
 
 }, [userdata])
 
 // this fetches follower names (if verefied) for dropdown menus 
 const getFollowerNames = async function () {
   var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-  const userFriends = [...username]
+  
     await Promise.all(
     followerIDs.map((follower) => 
     fetch(`http://127.0.0.1:8000/users/verified/${follower}/`, 
@@ -98,7 +105,30 @@ const getFollowerNames = async function () {
 
     }
 
+// function to store new chat in database 
+const createChat = function (e) {
+  e.preventDefault();
+  var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
 
+  setUsers([`${memberOne}`, `${memberTwo}`, `${memberThree}`, `${memberFour}`, `${memberFive}`])
+    // remove all empty strings from users state
+  // setUsers(users.filter(str => str != ''))
+  const postBody = {name : `${name}`, users: users}
+  
+  
+  const res = fetch('http://127.0.0.1:8000/chat/start/', 
+  {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        },
+    body: JSON.stringify(postBody),
+      }
+    )
+
+
+}
 
   return (
     <div className={styles.pageContainer}>
@@ -108,23 +138,26 @@ const getFollowerNames = async function () {
           <div className={styles.header}>Name</div>
           <input type="text" className={styles.input} name="chat name"  placeholder="Name your chat" onChange={evt => setName(evt.target.value)}/>
           <div className={styles.header}>Users  (max. 5)</div>
-          <select  className={styles.input} name="chat name"  placeholder="Name your chat" onChange={evt => setname(evt.target.value)}>
+          <select  className={styles.input} name="chat name"   onChange={evt => setMemberOne(evt.target.value)}>
+            <option className={styles.optionPlaceholder}></option>
             <option className={styles.optionPlaceholder}>{userdata.username}</option>
           </select>
-          <select  className={styles.input} name="chat name"  placeholder="Name your chat" onChange={evt => setname(evt.target.value)}>
-            <option className={styles.optionPlaceholder}></option>
+          <select  className={styles.input} name="chat name"  onChange={evt => setMemberTwo(evt.target.value)}>
+            <option className={styles.optionPlaceholder}>{null}</option>
+            {followerNames.map(follower => <option className={styles.optionPlaceholder}>{follower}</option>)}
+
           </select>
-          <select  className={styles.input} name="chat name"  placeholder="Name your chat" onChange={evt => setname(evt.target.value)}>
-            <option className={styles.optionPlaceholder}></option>
+          <select  className={styles.input} name="chat name" onChange={evt => setMemberThree(evt.target.value)}>
+            <option className={styles.optionPlaceholder}>{null}</option>
           </select>
-          <select  className={styles.input} name="chat name"  placeholder="Name your chat" onChange={evt => setname(evt.target.value)}>
-            <option className={styles.optionPlaceholder}></option>
+          <select  className={styles.input} name="chat name"  onChange={evt => setMemberFour(evt.target.value)}>
+            <option className={styles.optionPlaceholder}>{null}</option>
           </select>
-          <select  className={styles.input} name="chat name"  placeholder="Name your chat" onChange={evt => setname(evt.target.value)}>
-            <option className={styles.optionPlaceholder}></option>
+          <select  className={styles.input} name="chat name"  onChange={evt => setMemberFive(evt.target.value)}>
+            <option className={styles.optionPlaceholder}>{null}</option>
           </select>  
 
-          <button>Create</button>
+          <button onClick={createChat}>Create</button>
 
         </form>
 

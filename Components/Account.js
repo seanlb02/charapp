@@ -18,7 +18,9 @@ const [bio, setBio] = useState()
 const [city, setCity] = useState()
 const [country, setCountry] = useState()
 
-const [branchPost, setBranchPost] = useState()
+const [textPost, setTextPost] = useState()
+const [uploadPost, setUploadPost] = useState()
+const [linkPost, setLinkPost] = useState()
 const [branches, setBranches] = useState([])
 
 async function getAccount() {
@@ -100,7 +102,12 @@ const reverseBranchesRender = function() {
 
   if (branches !== undefined) {
   
-    return branches.reverse().map(branch => <div className={styles.branchBubble}>{branch.content}</div>)
+    return branches.reverse().map(branch => 
+    <div className={styles.branchBubble}>
+        <div className={styles.branchText}>{branch.text}</div>
+        <div>{branch.link}</div>
+        <div className={styles.branchTime}>{branch.timestamp}</div>
+      </div>)
   }
 
 }
@@ -108,7 +115,7 @@ const reverseBranchesRender = function() {
 const postBranch = async function(e) {
   e.preventDefault();
   const token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-  const postContent = {content: `${branchPost}`}
+  const postContent = {text: `${textPost}`, upload: `${uploadPost}`, link: `${linkPost}` }
 
     const res = await fetch(`http://127.0.0.1:8000/branches/${userdata.id}/new/`, {
     method: 'POST',
@@ -149,9 +156,10 @@ const postBranch = async function(e) {
       {NewBranch == true ? 
       
       <form className={styles.postForm}>
-       <textarea rows="2" className={styles.postInput} onChange={evt => setBranchPost(evt.target.value)}>
-       
-       </textarea>
+      <div className={styles.disclaimer}>What&apos;s on your mind?  (max. 100 characters)</div>
+       <textarea rows="2" className={styles.postInput} maxLength="100" onChange={evt => setTextPost(evt.target.value)}></textarea>
+       <div className={styles.disclaimer}>Enter a URL link here (max. 1 per branch)</div>
+       <textarea rows="1" className={styles.postInput} onChange={evt => setLinkPost(evt.target.value)}></textarea>
        <div className={styles.buttonContainer}>
        <button className={styles.postButton} onClick={postBranch}>Post branch</button>
        </div>
@@ -165,7 +173,7 @@ const postBranch = async function(e) {
 }
 
 const styles = {
-  profileContainer: " h-screen w-[60vw] flex flex-col ",
+  profileContainer: " h-screen w-[60vw] overflow-x-hidden flex flex-col ",
     headerContainer: "h-contain  w-100%  border-b-2 border-slate-200",
     treePreview: " flex flex-col h-screen w-full overflow-y-scroll items-center bg-blue-200 border-t-2 ",
     treeText: "text-slate-500 mt-12",
@@ -176,9 +184,12 @@ const styles = {
     bioContainer: "w-4/5 ml-auto flex flex-col h-contain py-6 flex gap-2 ",
     Location: "text-l text-slate-600",
     bio: "text-l",
-    postForm: "flex flex-col w-full",
-    postInput: "bg-blue-100 mx-10 align-center rounded-md p-1 px-2 resize-none",
+    disclaimer: "text-xs pl-12 pb-0",
+    postForm: "flex flex-col gap-5 w-4/5 bg-yellow-100 rounded-lg p-5 m-5 mx-5",
+    postInput: "bg-blue-200 mx-10 align-center rounded-md p-1 px-2 resize-none",
     buttonContainer: "flex ml-auto mr-12",
     postButton: "flex flex-end p-3 w-contain mt-5 bg-green-400 text-white rounded-lg mb-12",
-    branchBubble: "text-lg, h-contain py-5 px-5 w-4/5 mx-24 mb-12 bg-white rounded-md border-2"
+    branchBubble: " break-words text-lg, h-contain py-5 px-5 w-4/5 mx-24 mb-12 bg-white rounded-md border-2",
+    branchText: "flex break-words break-all text-md w-contain",
+    branchTime: "flex text-right text-sm"
 }

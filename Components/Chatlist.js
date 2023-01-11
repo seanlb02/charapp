@@ -17,6 +17,9 @@ export default function Chatlist() {
   const { user } = router.query;
 
   const [userdata, setUserdata] = useState([]);
+  const [userChats, setUserchats] = useState([]);
+
+  const [chatList, setChatList] = useState([]);
 
 
   async function getUserdata() {
@@ -40,6 +43,29 @@ export default function Chatlist() {
 
   }, [])
 
+  // fetch the list of chats that the logged in user is a part of 
+
+  async function getChatlist1() {
+    var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
+    const res = await fetch(`http://127.0.0.1:8000/chat/all/${userdata.username}`, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        },
+      
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    // .then((data =>  data.map(item => setUserChats(item))))
+
+  }
+
+  useEffect(() => {
+
+    getChatlist1()
+
+  }, [userdata])
 
   // go to 'create a chat' page
 
@@ -59,7 +85,7 @@ export default function Chatlist() {
 
           {/* bellow is the list of user chats where the sender/recievers are followed */}
 
-
+        
 
     </div>
   )
