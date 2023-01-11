@@ -17,7 +17,7 @@ export default function Chatlist() {
   const { user } = router.query;
 
   const [userdata, setUserdata] = useState([]);
-  const [userChats, setUserchats] = useState([]);
+  const [userChats, setUserChats] = useState([]);
 
   const [chatList, setChatList] = useState([]);
 
@@ -56,8 +56,9 @@ export default function Chatlist() {
       
     })
     .then(res => res.json())
-    .then(data => console.log(data))
-    // .then((data =>  data.map(item => setUserChats(item))))
+    .then(data => setUserChats(data))
+
+    // .then((data => data.map(item => setUserChats(item))))
 
   }
 
@@ -74,6 +75,18 @@ export default function Chatlist() {
     router.push('/chat/createchat')
   }
 
+  function renderUserChats() {
+    if (userChats.length > 0 ){
+      return userChats.map((object, index) => 
+      <div className={styles.chatlistItem}>
+        {object.users.map((name, index) => <div>{name}</div>)}
+        
+      </div>)
+      // return userChats.map((object, index) => <div className={styles.chatlistItem} key={index}>{(index ? ',' : '') + object.users}</div>)
+    }
+    else{ return <div>hey</div>}
+  }
+
   return (
     <div className={styles.panelContainer}>
         <section className={styles.chatHeader}><div>Chatlist</div></section>
@@ -83,7 +96,14 @@ export default function Chatlist() {
         <section className={styles.startButtonContainer}><button className={styles.startButton} onClick={createChat}>Start a Chat</button></section>
       : <></>}
 
-          {/* bellow is the list of user chats where the sender/recievers are followed */}
+        <section>
+          <div className={styles.listHeader}><strong>Chats you&apos;re in</strong></div>
+          
+        </section>
+        {renderUserChats()}
+        <section>
+        <div className={styles.listHeader}><strong>Chats you follow</strong></div>
+        </section>
 
         
 
@@ -93,8 +113,10 @@ export default function Chatlist() {
 
 const styles = {
     panelContainer: "xlg:block overflow-y-scroll h-[100vh] mb-96 mr-2 w-[25vw] bg-white border-slate-200 border-l-2 static right-0 top-25 xxs:hidden ",
-    chatHeader: "flex w-full h-20 text-xl pl-12 items-center border-b-2  align-center",
+    chatHeader: "flex w-full h-20 text-xl pl-10 items-center border-b-2  align-center",
     startButtonContainer: "flex mt-2 w-full h-20 text-xl content-center justfiy-center items-center align-center",
-    startButton: "flex bg-green-500 rounded-xl text-white p-2 border-2 align-center mx-auto"
+    startButton: "flex bg-green-500 rounded-xl text-white p-2 border-2 align-center mx-auto",
+    listHeader: "text-sm pl-8 py-2 border-t-2 border-b-2",
+    chatlistItem: "flex justify-center gap-2 border-4 items-center text-xs h-20",
 
 }
