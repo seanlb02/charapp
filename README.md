@@ -1,8 +1,4 @@
-## PWA for sharing music 
+## PWA Where users can get access to private microblogs and live chats of verified users
 
-[Preview](https://chatshare-seanlb02.vercel.app/)
+[Preview](https://chattree-front-seanlb02.vercel.app)
 
-Use login credentials for test account: 
-
-Email: jerryj@gmail.com
-Password: password666

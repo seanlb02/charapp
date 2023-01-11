@@ -51,7 +51,8 @@ async function getToken(e) {
                 .then((data) => {
                 setToken(data.token)
                 // router.push("/profile"); 
-                })}})
+                })
+            }})
             .catch((error) => {
                 console.error('Error:', error);
                 })
@@ -79,12 +80,12 @@ useEffect(() => {
     <div className={styles.pageContainer}>
         <div className={styles.HeroContainer}>
             <div className={styles.HeroText}>
-                <div className={styles.title}>Have a word with <em>your</em> world</div>
-                <div className={styles.text}>Share whats on your mind with the people that actually want it</div>
+                <div className={styles.title}>Re-connect with <em>your</em> world</div>
+                <div className={styles.text}>Front row seats to content, updates and private chats from the people you want - <em>24/7</em></div>
                  
             </div>
             <div className={styles.heroImage}>
-                <div className={styles.mainImage}></div>
+                <div className={styles.mainImage}><Image src="/Hero container.svg" width={2000} height={500}/></div>
             </div>
             
         </div>
@@ -92,7 +93,7 @@ useEffect(() => {
                 
                 <div className={styles.aboutTwoTitle}>
                     <div className={styles.aboutheader}><strong>Say goodbye to the noise</strong></div>
-                    [App name] is a way for people to share whats on their mind without the public rabble <br></br><br></br>. 
+                    [App name] is a way for verified accounts to share with their community without the public rabble <br></br><br></br>. 
                 </div>
                 <div className={styles.rightImage}>
                 <Image src="" width={400} height={100}/>
@@ -143,20 +144,12 @@ useEffect(() => {
                 <Image src="" width={400} height={100}/>
                 </div>
             </div>  
-            <div className={styles.aboutOne}>
-                <div className={styles.aboutOneTitle}>
-                <div className={styles.aboutheader}><strong>Keep your content</strong></div>
-                        No public feed and age-restricted accounts means no more content removal. <br><br></br></br>
-                        Your followers are liable for what they view in the branches you distribute.  
-                </div>
-                <div className={styles.rightImage}>
-                <Image src="" width={400} height={100}/>
-                </div>
            
-                
-                <section className={styles.footerHero}>
                 <header id="login"  className={styles.loginHeader}>Filter your life.
                 <br></br>Sign in and get updates from the people you asked for</header>
+                <section className={styles.footerHero}>
+                
+                
                 <form onSubmit={getToken} className={styles.form}>
                         <div>{notify}</div>
                         <input type="text" className={styles.input} name="email"  placeholder="Email Address" onChange={evt => setEmail(evt.target.value)}/>
@@ -169,17 +162,16 @@ useEffect(() => {
                 </form>   
                
                 <div className={styles.footerImageContainer}>
-                  
+                <Image src="/HeroImage.svg" width={800} height={800}/>
                 </div>
-            </section>
+                </section> 
     </div>
-    )
-}
+    )}
 
 const styles = {
-    HeroContainer: 'flex xs:flex-col lg:flex-row lg:min-h-screen mb-10 align-center justify-center',
-    HeroText: 'flex flex-col w-[100vw]  xs:p-10 lg:mt-0 pr-0 align-center ',
-
+    HeroContainer: 'flex  lg:flex-col lg:min-h-screen mb-10 align-center justify-center',
+    HeroText: 'flex flex-col w-[100vw]  lg:mt-0 pr-0 align-center ',
+    mainImage: 'flex h-[50vh] w-[100vw]',
     title: 'font-roboto md:pr-0 font-bold xs:text-3xl md:text-4xl md:px-0 xs:pt-12 md:pt-16 md:text-center lg:text-5xl mb-10 lg:pl-4', 
     text: 'text-l md:pr-0 text-center lg:pl-0 mx-96',
 
@@ -192,7 +184,7 @@ const styles = {
     messageFeedImage: 'flex w-1/2 pl-12',
     aboutThree: 'lg:flex lg:flex-row h-[contain] text-yellow-100 w-[100vw] items-center  bg-red-300 py-12 sm:flex sm:flex-col',
 
-    loginHeader: 'text-4xl pl-36 pt-24',
+    loginHeader: 'text-4xl pl-36 pt-24 w-3/5',
     Button: 'flex bg-[#a09924] rounded-lg p-1 w-1/2 justify-center ml-2 mt-5 px-5 text-white',
     input: 'rounded-lg m-2 p-2 bg-[#f4f4ee] mr-36', 
     form: 'flex flex-col w-1/3 pt-10 mt-10 mr-12 ml-36', 
@@ -203,6 +195,6 @@ const styles = {
     gridImage2: 'absolute h-52 w-52 right-60 top-5 rounded-full bg-overmono',
     gridImage3: 'absolute h-72 w-72 bottom-5 right-54 left-16 rounded-full bg-peggy bg-cover bg-no-repeat',
     gridImage4: 'absolute h-96 w-96 -bottom-28 -right-10 rounded-full bg-dmas bg-contain',
-    footerHero: 'flex w-[100vw] flex-col',
-    footerImageContainer: 'relative w-2/3 overflow-y-hidden',
+    footerHero: 'flex w-[100vw]',
+    footerImageContainer: 'flex w-2/3 overflow-y-hidden',
 }
