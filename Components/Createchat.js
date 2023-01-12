@@ -84,6 +84,12 @@ useEffect(() => {
 
 }, [userdata])
 
+useEffect(() => {
+   
+  getFollowerNames();
+
+}, [followerIDs])
+
 // this fetches follower names (if verefied) for dropdown menus 
 const getFollowerNames = async function () {
   var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
@@ -109,11 +115,11 @@ const getFollowerNames = async function () {
 const createChat = function (e) {
   e.preventDefault();
   var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-
-  setUsers([`${memberOne}`, `${memberTwo}`, `${memberThree}`, `${memberFour}`, `${memberFive}`])
+const memberarray = [`${memberOne}`, `${memberTwo}`, `${memberThree}`, `${memberFour}`, `${memberFive}`]
+  // setUsers([`${memberOne}`, `${memberTwo}`, `${memberThree}`, `${memberFour}`, `${memberFive}`])
     // remove all empty strings from users state
   // setUsers(users.filter(str => str != ''))
-  const postBody = {name : `${name}`, users: users}
+  const postBody = {name : `${name}`, users: memberarray}
   
   
   const res = fetch('http://127.0.0.1:8000/chat/start/', 

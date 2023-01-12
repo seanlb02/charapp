@@ -69,7 +69,6 @@ export default function Chatlist() {
   }, [userdata])
 
   // go to 'create a chat' page
-
   const createChat = function(e) {
     e.preventDefault()
     router.push('/chat/createchat')
@@ -78,32 +77,45 @@ export default function Chatlist() {
   function renderUserChats() {
     if (userChats.length > 0 ){
       return userChats.map((object, index) => 
-      <div className={styles.chatlistItem}>
-        {object.users.map((name, index) => <div>{name}</div>)}
-        
-      </div>)
+      <Link href={`/chats/${object.name}`}>
+        <div className={styles.chatlistItem}>
+          {object.users.map((name, index) => <div>{name}</div>)}
+        </div>
+      </Link>)
       // return userChats.map((object, index) => <div className={styles.chatlistItem} key={index}>{(index ? ',' : '') + object.users}</div>)
     }
-    else{ return <div>hey</div>}
+    else{ return <div></div>}
+  }
+
+  function renderChats() {
+
+    null
   }
 
   return (
     <div className={styles.panelContainer}>
-        <section className={styles.chatHeader}><div>Chatlist</div></section>
+        <section className={styles.chatHeader}><div>Chatlist</div>
+        
+      </section>
 
 
-        {userdata.is_verified == true ? 
-        <section className={styles.startButtonContainer}><button className={styles.startButton} onClick={createChat}>Start a Chat</button></section>
-      : <></>}
+        
 
         <section>
           <div className={styles.listHeader}><strong>Chats you&apos;re in</strong></div>
           
         </section>
+        <section className={styles.userchatlist}>
         {renderUserChats()}
-        <section>
+        </section>
+
+        <section className={styles.userchatlist}>
         <div className={styles.listHeader}><strong>Chats you follow</strong></div>
         </section>
+
+        {userdata.is_verified == true ? 
+        <section className={styles.startButtonContainer}><button className={styles.startButton} onClick={createChat}>Start a Chat</button></section>
+      : <></>}
 
         
 
@@ -116,7 +128,8 @@ const styles = {
     chatHeader: "flex w-full h-20 text-xl pl-10 items-center border-b-2  align-center",
     startButtonContainer: "flex mt-2 w-full h-20 text-xl content-center justfiy-center items-center align-center",
     startButton: "flex bg-green-500 rounded-xl text-white p-2 border-2 align-center mx-auto",
-    listHeader: "text-sm pl-8 py-2 border-t-2 border-b-2",
-    chatlistItem: "flex justify-center gap-2 border-4 items-center text-xs h-20",
+    listHeader: "text-sm pl-8 py-2 border-t-2 border-b-2 bg-blue-100",
+    userchatlist: "h-52 overflow-y-scroll scrollbar-hide",
+    chatlistItem: "flex justify-center gap-2 border-b-2 items-center text-xs h-20 ",
 
 }

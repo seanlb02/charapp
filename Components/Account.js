@@ -150,7 +150,7 @@ const postBranch = async function(e) {
     </section>
     <section className={styles.treePreview}>
       <div className={styles.addBranch} onClick={dropdownInput}>
-              <div onClick={upload}><Image src="/addIcon.png" width={50} height={50}></Image></div>
+              <div><Image src="/addIcon.png" width={50} height={50}></Image></div>
               <div>Add branch...</div>
       </div>
       {NewBranch == true ? 

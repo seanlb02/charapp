@@ -8,11 +8,25 @@ import { useState, useEffect } from "react";
 
 
 export default function ChatWindow() {
+
+
+
+  const router = useRouter()
+
+
+
   return (
-    <div className={styles.pageContainer}>Users will be able to read live chats between verified users they follow</div>
+    <div className={styles.pageContainer}>
+        <section>
+          <div>{router.query.id}</div>
+        </section>
+
+
+
+    </div>
   )
 }
 
 const styles = {
-    pageContainer: " h-screen w-[60vw] flex flex-col items-center justify-center",
+    pageContainer: " h-screen w-[60vw] flex flex-col",
 }

@@ -13,7 +13,7 @@ export default function Sidenav() {
         <section className={styles.navLinkContainer}>
             <div className={styles.logo}>[Logo]</div>
             <Sidenavitem title="Profile" src="/avatar.png" width={27} height={20} link="/profile" />
-            <Sidenavitem title="Chat tree" src="/chattree.png" width={28} height={21} link="/chats/id" />
+            <Sidenavitem title="Chat tree" src="/chattree.png" width={30} height={23} link="/chat/createchat" />
             <Sidenavitem title="Search" src="/personsearch.png" width={27} height={20} link="/search"/>
             <Sidenavitem title="Settings" src="/settingicon.png" width={27} height={20} link="/settings"/>
             <Sidenavitem title="Help" src="/helpicon.png" width={25} height={18} link=""/>
