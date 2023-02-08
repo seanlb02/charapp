@@ -6,6 +6,7 @@ import messages from '../public/messages.svg'
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Login } from '../Services/auth_services';
 
 
 
@@ -13,50 +14,21 @@ export default function Homebody() {
 
 const router = useRouter();
 
+let [username, setUsername] = useState("")
 let [password, setPassword] = useState("")
-let [email, setEmail] = useState("")
-
-// handler function to set user name and pass to whatevers submited 
-
-// const inputPassword = function(){
-//     setPassword(password == `{password}`)
-// }
-
-// const inputUsername = function(){
-//     setUsername(email == `{email}`)
-// }
 
 const [notify, setNotify] = useState();
-
 const [token, setToken] = useState("")
-let AuthBody = { email: `${email}`, password: `${password}` };
 
     
 async function getToken(e) {
     e.preventDefault();
-    const res = await
-        fetch('http://127.0.0.1:8000/auth/login/', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(AuthBody),
-        })
-        .then(res => {
-            if (!res.ok){
-                setNotify("Invalid username or password.")
-            }
-            else {
-                return res.json()
-                .then((data) => {
-                setToken(data.token)
-                // router.push("/profile"); 
-                })
-            }})
-            .catch((error) => {
-                console.error('Error:', error);
-                })
-            };
+    Login(username, password)
+        .then(res => {if (!res.ok){setNotify("Invalid username or password.")}})
+        .then((data) => {
+        setToken(data.token)
+        })     
+};
         
 
 // add user token to localStorage and push them to their profile
@@ -81,7 +53,7 @@ useEffect(() => {
         <div className={styles.HeroContainer}>
             <div className={styles.HeroText}>
                 <div className={styles.title}>Re-connect with <em>your</em> world</div>
-                <div className={styles.text}>Front row seats to content, updates and private chats from the people you want - <em>24/7</em></div>
+                <div className={styles.text}>Front row seats to the messages and group chats from the people you asked for - <em>24/7</em></div>
                  
             </div>
             <div className={styles.heroImage}>
@@ -152,7 +124,7 @@ useEffect(() => {
                 
                 <form onSubmit={getToken} className={styles.form}>
                         <div>{notify}</div>
-                        <input type="text" className={styles.input} name="email"  placeholder="Email Address" onChange={evt => setEmail(evt.target.value)}/>
+                        <input type="text" className={styles.input} name="email"  placeholder="Email Address" onChange={evt => setUsername(evt.target.value)}/>
                         <input type="text" className={styles.input} name="password"  placeholder="Password" onChange={evt => setPassword(evt.target.value)}/>
                     
                 <div className={styles.formButtons}>

@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/profile": "pages/profile.js",
-  "/user/[user]": "pages/user/[user].js",
-  "/": "pages/index.js"
+  "/branchlist": "pages/branchlist.js",
+  "/profile": "pages/profile.js"
 }

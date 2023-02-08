@@ -10,9 +10,7 @@ export default function profile() {
   return (
     <>
       <div className={styles.pageContainer}>
-      <Sidenav/>
       <UserSearch/>
-      <FriendsList/>
       </div>
     </>
   )

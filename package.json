@@ -10,6 +10,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.7",
+    "@mui/styled-engine-sc": "^5.11.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "jest": "^29.3.1",

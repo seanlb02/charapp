@@ -43,25 +43,6 @@ const [isLoaded, setIsLoaded] = useState(false)
 
 }
 
-      // .then(() => {followerArray.map(follower => fetch(`http://127.0.0.1:8000/users/${follower}/`, {
-      //   method: 'GET',
-      //   headers: {
-      //       'Content-Type': 'application/json',
-      //       'Authorization': `Bearer ${token}`,
-      //       },
-      //   })
-      //   .then(res => res.json())
-      //   .then((data => nameArray.push(data.name))))})
-      //   .then(() => setUsername(nameArray))
-      //   .then(() => setIsLoaded(true))
-      //   .then(console.log(nameArray))
-      //   .then(console.log(followers))
-
-
-      // .catch((error) => {
-      //   console.error('Error:', error)})
-      
-      // }
       
      
 
@@ -86,26 +67,7 @@ const [isLoaded, setIsLoaded] = useState(false)
         }
         
           
-        //  .then(data => nameArray.push(data.username))
-        //  .then(console.log(nameArray))
-           
-      
-          
 
-
-        
-        // nameArray.push(responses)
-        // console.log(nameArray)
-        
-        
-
-     
-
-        // .then(res => res.json())
-        // .then((data) => {return data.name})
-        // })
-        // )
-        // console.log(responses)
       
 // this runs first API fetch onMount which sets 'followers' state 
   useEffect(() => {
