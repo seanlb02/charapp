@@ -19,7 +19,8 @@ const [bio, setBio] = useState()
 
 const [branches, setBranches] = useState([])
 
-
+// message input stored here
+const [text, setText] = useState()
 
 const upload = function(){
   router.push('/upload')
@@ -85,8 +86,12 @@ const postBranch = async function(e) {
       </section>
       
       <section className={styles.branchWindow}>
-        <div>chats go here</div>
+        <div>hmr updatee</div>
       </section>
+      <form>
+        <input className={styles.input} placeholder="Type a message..."></input>
+      </form>
+      
     </div>
   )
 }
@@ -94,8 +99,9 @@ const postBranch = async function(e) {
 const styles = {
   profileContainer: " h-screen w-[100vw] overflow-x-hidden flex flex-col ",
     headerContainer: "h-contain  w-100%  border-b-2 border-slate-200",
-    branchWindow: " flex flex-col h-screen w-full overflow-y-scroll items-center bg-blue-200 border-t-2 ",
+    branchWindow: " flex flex-col h-screen w-full overflow-y-scroll items-center border-t-2 ",
     treeText: "text-slate-500 mt-12",
+    input: "rounded-xl p-2 w-[80vw]",
     profilePic: "rounded-full",
     infoContainer: "w-5/5 ml-auto h-contain flex gap-5 items-center content-center ml-5 mt-16",
     userName: "text-3xl",
