@@ -5,7 +5,8 @@ import { useEffect, useState} from 'react'
 
 import UserProfile from '../../Components/UserProfile.js'
 import FriendsList from '../../Components/FriendsList.js'
-import Sidenav from '../../Components/Sidenav.js'
+import Sideslide from '../../Components/Sideslide.js'
+import Footnav from '../../Components/Footnav.js'
 
 // export const getStaticPaths = async () => {
 
@@ -48,15 +49,15 @@ export default function profile() {
   return (
     <>
       <div className={styles.pageContainer}>
-      <Sidenav/>
+      <Sideslide/>
       <UserProfile/>
-      <FriendsList/>
+      <Footnav/>
       </div>
     </>
   )
 }
 
 const styles = {
-    pageContainer: "h-[100vh] flex w-[100vw] ",
-    nav: "fixed bg-red-500s"
+    pageContainer: "h-[100vh] flex flex-col w-[100vw] ",
+   
 }

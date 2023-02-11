@@ -23,6 +23,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
+import { fabClasses } from "@mui/material";
 
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -50,6 +51,17 @@ export default function MainNavigation({}) {
   //  put the check if VIP service fetch here and set isVip state to the value retured in json
   }, [])
 
+  const [onMobile, SetonMobile] = useState("");
+  const [screen, Setscreen] = useState("");
+
+    
+
+      if(typeof window !== "undefined"){
+        window.addEventListener("resize", function() {
+          if(window.innerWidth > 600){SetonMobile(false)}
+          else{SetonMobile(true)}
+        });
+    }
 
 
   //function that is being called every time the drawer should open or close, the keys tab and shift are excluded so the user can focus between the elements with the keys
@@ -64,8 +76,12 @@ export default function MainNavigation({}) {
     setState(open);
   };
 
+  
+
+
+
   return (
-    <AppBar  style={{ background: 'transparent', boxShadow: 'none'}}>
+    <AppBar className={styles.navbar} position="static" style={{ background: 'transparent', boxShadow: 'none', display: 'block'}}>
       <Container maxWidth="lg" disableGutters="true">
         <Toolbar>
           
@@ -84,11 +100,13 @@ export default function MainNavigation({}) {
           >
             <MenuIcon style={{fill: "black"}}/>
           </IconButton>
+          <div className={styles.applogo}><Image src="/home.png" width={45} height={45}></Image>
+        </div>
          {/* conditionally render the home button to access logged in VIP profile */}
           {isVip == true ? 
-              <div className={styles.homelogo}>          
+              <Link href="/profile"><div className={styles.homelogo}>          
                 <Image src="/home.png" width={45} height={45}></Image>
-              </div>
+              </div></Link>
               :
               <div></div>
           }
@@ -162,5 +180,7 @@ export default function MainNavigation({}) {
 }
 
 const styles = {
-  homelogo: 'ml-auto',
+  homelogo: "ml-auto",
+  applogo: 'text center flex justify-center w-full h-full text-red',
+  navbar: "flex h-[10vh] w-[100vw]"
 }

@@ -36,7 +36,8 @@ const searchUser = function(e) {
 }
 
   return (
-    
+    <>
+    <div  className={styles.listheading}>Find </div>
     <div className ={styles.pageContainer}>
         <div className={styles.search}>
             <form onSubmit={searchUser} className={styles.inputview}>
@@ -52,14 +53,16 @@ const searchUser = function(e) {
         {user == "" && <div></div>}
     
     </div> 
+    </>
     )
 }
 
 const styles = {
-    pageContainer: "h-screen w-[100vw] flex flex-col rounded",
+    pageContainer: "h-[80vh] w-[100vw] flex flex-col rounded",
     search: "flex justify-center items-center align-center w-full h-20px border p-5 rounded",
     searchInput: "rounded p-2 bg-[#f4f4ef]",
     searchButton: "h-contain px-2",
-    inputview: "flex flex-row bg-[#f4f4ef] rounded-lg mx-6"
+    inputview: "flex flex-row bg-[#f4f4ef] rounded-lg mx-6",
+    listheading: "text-2xl flex justify-center text-center pb-4 border-b-2",
 
 }

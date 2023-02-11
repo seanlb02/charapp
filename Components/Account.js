@@ -75,10 +75,10 @@ const postBranch = async function(e) {
       <section className={styles.headerContainer}>
             <div className={styles.infoContainer}>
               <img className={styles.profilePic} src="https://i.pravatar.cc/300" height={70} width={70}/>
-              <div className={styles.userName}>{userdata.username}</div>
+              <div className={styles.userName}>username</div>
             </div>
             <div className={styles.bioContainer}>
-              <div className={styles.bio}>{userdata.bio}</div>
+              <div className={styles.bio}> short bio goes here</div>
             </div>
             <div className={styles.editbuttoncontainer}>
                 <Link className={styles.editbutton} href="/edit"><Image src="/editprofile.png" width={22} height={20}></Image>Edit</Link>
@@ -86,7 +86,7 @@ const postBranch = async function(e) {
       </section>
       
       <section className={styles.branchWindow}>
-        <div>hmr updatee</div>
+        <div>hmr tst</div>
       </section>
       <form>
         <input className={styles.input} placeholder="Type a message..."></input>
@@ -97,13 +97,13 @@ const postBranch = async function(e) {
 }
 
 const styles = {
-  profileContainer: " h-screen w-[100vw] overflow-x-hidden flex flex-col ",
-    headerContainer: "h-contain  w-100%  border-b-2 border-slate-200",
+  profileContainer: " h-[80vh] w-[100vw] overflow-x-hidden flex flex-col ",
+    headerContainer: "h-auto  w-100%  border-b-2 border-slate-200",
     branchWindow: " flex flex-col h-screen w-full overflow-y-scroll items-center border-t-2 ",
     treeText: "text-slate-500 mt-12",
-    input: "rounded-xl p-2 w-[80vw]",
+    input: "rounded-xl p-2 w-[90vw] m-4 bg-slate-100",
     profilePic: "rounded-full",
-    infoContainer: "w-5/5 ml-auto h-contain flex gap-5 items-center content-center ml-5 mt-16",
+    infoContainer: "w-5/5 ml-auto h-contain flex gap-5 items-center content-center ml-5 mt-0",
     userName: "text-3xl",
     addBranch: "flex items-center gap-1 cursor-pointer my-5 mb-5",
     bioContainer: "w-4/5 ml-auto flex flex-col h-contain py-6 flex gap-2 ",
