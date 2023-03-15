@@ -7,7 +7,7 @@ import { fetchBranches } from "../Services/branch_services";
 import Userchats from './Userchats'; 
 import { chatData } from "../Services/chat_services";
 import { CheckTokenExpiration } from "../Services/token_services";
-import { getUserData } from "../Services/user_services";
+import { addFavourite, getUserData } from "../Services/user_services";
 
 export default function Account() {
 
@@ -106,7 +106,7 @@ const renderTextbox = function() {
             <div className={styles.infoContainer}>
               {/* <img className={styles.profilePic} src="https://i.pravatar.cc/300" height={70} width={70}/> */}
               <div className={styles.userName}>{name}</div>
-              <div className={styles.favouritesButton}>Add to Favourites</div>
+              <div className={styles.favouritesButton} onClick={() => addFavourite(chatname )}>Add to Favourites</div>
             </div>
             
             <div className={styles.bioContainer}>
@@ -140,7 +140,7 @@ const renderTextbox = function() {
 }
 
 const styles = {
-  profileContainer: " h-[80vh] w-[100vw] overflow-x-hidden flex flex-col ",
+  profileContainer: " h-[82vh] w-[100vw] overflow-x-hidden flex flex-col ",
     headerContainer: "h-auto  w-100%  border-b-2 border-slate-200",
     branchWindow: " flex flex-col h-screen w-full align-center justify-center items-center  border-t-2 bg-blue-50",
     treeText: "text-slate-500 mt-12",

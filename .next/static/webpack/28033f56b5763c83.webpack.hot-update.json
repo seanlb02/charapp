@@ -1,1 +1,0 @@
-{"c":["webpack"],"r":["pages/chats/[id]"],"m":["./Components/ChatWindow.js","./Components/Chatbody.js","./Components/Sidenav.js","./Components/Sidenavitem.js","./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=%2Fhome%2Fcharapp%2Fpages%2Fchats%2F%5Bid%5D.js&page=%2Fchats%2F%5Bid%5D!","./pages/chats/[id].js"]}

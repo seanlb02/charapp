@@ -99,10 +99,10 @@ const updateBio = function() {
 }
 
 const styles = {
-  profileContainer: " h-[80vh] w-[100vw] overflow-x-hidden flex flex-col ",
+  profileContainer: " h-[82vh] w-[100vw] overflow-x-hidden flex flex-col ",
     headerContainer: "h-auto  w-100%  border-b-1 border-slate-200",
-    branchWindow: "shadow flex flex-col h-auto w-full align-center justify-center items-center  border-t-2 ",
-    windowList: "overflow-y-scroll scrollbar-none",
+    branchWindow: "shadow flex flex-col h-auto w-full align-center justify-center items-center border-t-2 ",
+    windowList: "overflow-y-scroll scrollbar-none ",
     treeText: "text-slate-500 mt-12",
     editbio: "p-1 rounded-full px-2 text-sm border-2 border-slate-200",
     input: " rounded-xl p-2 w-[90vw] m-4 mb-5 py-3 bg-slate-200",

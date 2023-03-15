@@ -51,8 +51,8 @@ function searchUser(e) {
 }
 
 const styles = {
-    pageContainer: "h-[80vh] w-[100vw] flex flex-col rounded",
-    search: "flex justify-center items-center align-center w-full h-20px border p-5 rounded",
+    pageContainer: "h-[80vh] w-[100vw] flex flex-col rounded bg-green-100",
+    search: "bg-white flex justify-center items-center align-center w-full h-20px  p-5 rounded",
     searchInput: "rounded p-2 bg-[#f4f4ef]",
     searchButton: "h-contain px-2",
     inputview: "flex flex-row bg-[#f4f4ef] rounded-lg mx-6",

@@ -87,3 +87,27 @@ export async function editBio(bio) {
     return res.json();
 
 }
+
+export async function addFavourite(chatname) {
+    var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
+    const res = await fetch(`http://localhost:5000/users/favourite/new/${chatname}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            },
+    })
+    return res.json();
+}
+
+export async function getFavourites() {
+    var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
+    const res = await fetch(`http://localhost:5000/users/favourites/get/`,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            },
+    })
+    return res.json();
+}
