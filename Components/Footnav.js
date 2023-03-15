@@ -11,19 +11,19 @@ export default function Footnav() {
         <div className={styles.navIcon}>
             <Link clasName={styles.navIcon} href="/branchlist">
                 <Image title="Chat tree" src="/branch.png" width={32} height={25} link="/branchlist" />
-                <div className={styles.iconText}>Branches</div>
+                
             </Link>
         </div>
         <div className={styles.navIcon}>
-            <Link clasName={styles.navIcon} href="/chatlist">
-                <Image title="Chat tree" src="/chattree.png" width={32} height={25} link="/chatlist" />
-                <div className={styles.iconText}>Chat Tree</div>
-            </Link>
+            
+                <Image title="Chat tree" src="/chattree.png" width={40} height={40} />
+                <div className={styles.iconText}></div>
+            
         </div>
         <div className={styles.navIcon}>
             <Link href="/search">
                 <Image title="Chat tree" src="/searchIcon.png" width={32} height={25} link="/find" />
-                <div className={styles.iconText}>Find</div>
+                <div className={styles.iconText}></div>
             </Link>
         </div>
     </div>
@@ -33,7 +33,7 @@ export default function Footnav() {
 }
 
 const styles ={
-    footerContainer: "flex min-h-[10vh] w-[100vw] border-t-2 border-slate-100",
+    footerContainer: "flex min-h-[8vh] w-[100vw] border-t-2 border-slate-100 align-center",
     navIcon: "flex flex-1 flex-col gap-2  content-center justify-center align-center items-center",
     iconText: "text-xs text-center"
 }

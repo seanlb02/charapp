@@ -25,14 +25,14 @@ export default function Register() {
   const router = useRouter()
   
   
-  const RegisterBody = {username: `${username}`, email: `${email}`, password: `${password}`, phonenumber: `${phonenumber}`, age: `${age}`}
+  const RegisterBody = {user: `${username}`, email: `${email}`, pwd: `${password}`, phonenumber: `${phonenumber}`, age: `${age}`}
   const [notify, setNotify] = useState("");
 
   // make post to the backend and store user in db:
 
 const registerUser = async function() {
 
-  const res = await fetch('http://127.0.0.1:8000/auth/register/', {
+  const res = await fetch('http://localhost:5000/auth/register', {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json',
@@ -41,8 +41,8 @@ const registerUser = async function() {
     })
     .then(res => {
       if (!res.ok){
-          setNotify("One or more entries were invalid. Please try again")
-          // alert("Invalid username or password.")
+          setNotify("That username already exists. Please try again")
+         
       }
       else {
           return res.json()
@@ -59,20 +59,18 @@ const registerUser = async function() {
     <>
     <Navbar/>
     <div className={styles.pageContainer}>
-        <section className={styles.regImage}>
-          [bg image here]
-        </section>
+        
         <section className={styles.loginForm}>
             <div className={styles.title}>Enter the fields below to create an account with us.</div>
             <form  className={styles.form}>
                     <div className={styles.errortext}>{notify}</div>
-                    <input type="text" className={styles.input} name="username"  placeholder="Username" onChange={evt => setUsername(evt.target.value)}/>
+                    <input type="text" className={styles.input} name="username"  placeholder="Username" maxlength="12" onChange={evt => setUsername(evt.target.value)}/>
                     <div className={styles.disclaimer}>(maximum 20 characters)</div>
                     <input type="text" className={styles.input} name="email"  placeholder="Email Address" onChange={evt => setEmail(evt.target.value)}/>
                     <input type="text" className={styles.input} name="password"  placeholder="Password" onChange={evt => setPassword(evt.target.value)}/>
                     <div className={styles.disclaimer}>(minimum 8 characters)</div>
                     <input type="text" className={styles.input} name="Retype password"  placeholder="Retype Password"/>
-                    <input type="text" className={styles.input} name="age"  placeholder="Date of Birth [YYYY-MM-DD]" onChange={evt => setAge(evt.target.value)}/>
+                    <input type="text" className={styles.input} name="age"  placeholder="Date of Birth [YYYY-MM-DD] " onChange={evt => setAge(evt.target.value)}/>
                     <div className={styles.disclaimer}>(users must be over 13 years)</div>
                     <div className={styles.numberContainer}>
                     <select  className={styles.code} name="countrycode"  onChange={evt => setCountrycode(evt.target.value)}>
@@ -100,16 +98,16 @@ const registerUser = async function() {
 }
 
 const styles ={
-    pageContainer: "flex flex-row w-[100vw] h-contain bg-blue-300",
-    loginForm: "flex justify-center flex-col w-1/2  items-center bg-[#fde6b2] m-12 rounded-xl",
-    form: "flex gap-4 flex-col w-1/3 pt-10 mt-5 items-center justify-center", 
+    pageContainer: "flex flex-col w-full h-contain bg-blue-300 justify-center items-center",
+    loginForm: "flex justify-center flex-col items-center bg-[#fde6b2] m-8 rounded-xl",
+    form: "flex gap-4 flex-col w-full pt-10 mt-5 items-center justify-center", 
     regImage: "felx w-1/2",
     input: 'rounded-lg m-2 p-2 bg-[#f4f4ee]', 
-    formButtons: 'flex text-white bg-green-400 flex-col w-1/3 p-2 items-center rounded-md mt-12 mb-36', 
+    formButtons: 'flex text-white bg-green-400 flex-col w-2/3 p-2 items-center rounded-md mt-12 mb-36', 
     title: 'text-2xl px-12 pt-16',
     disclaimer: "text-xs text-slate-600 -mt-4",
     errortext: "text-red-600",
-    numberContainer: "flex gap-1 w-64",
+    numberContainer: "flex gap-1  mx-4",
     phoneinput: 'flex rounded-lg w-3/4  p-2 bg-[#f4f4ee]', 
     code: "flex w-1/4 h-contain rounded-lg py-2 px-1  bg-[#f4f4ee]"
 }

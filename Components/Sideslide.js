@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import { Logout } from "../Services/auth_services";
 
 //drawer elements used
 import Drawer from "@mui/material/Drawer";
@@ -100,7 +101,7 @@ export default function MainNavigation({}) {
           >
             <MenuIcon style={{fill: "black"}}/>
           </IconButton>
-          <div className={styles.applogo}><Image src="/home.png" width={45} height={45}></Image>
+          <div className={styles.applogo}><Image src="/logochat.svg" width={50} height={50}></Image>
         </div>
          {/* conditionally render the home button to access logged in VIP profile */}
           {isVip == true ? 
@@ -127,7 +128,7 @@ export default function MainNavigation({}) {
               sx={{
                 p: 2,
                 height: 1,
-                backgroundColor: "#dbc8ff"
+                backgroundColor: "white"
               }}
             >
               {/* when clicking the icon it calls the function toggleDrawer and closes the drawer by setting the variable open to false */}
@@ -141,16 +142,16 @@ export default function MainNavigation({}) {
                 <div>
                   <ListItemButton>
                     <ListItemIcon>
-                      <ImageIcon sx={{ color: "primary.main" }} />
+                    <Image src='/settingicon.png' width={25} height={25}></Image>
                     </ListItemIcon>
                     <ListItemText primary="Settings" />
                   </ListItemButton>
                 </div>
 
-                <div>
+                <div onClick={() => Logout()}>
                   <ListItemButton>
                     <ListItemIcon>
-                      <DescriptionIcon sx={{ color: "primary.main" }} />
+                      <Image priority src='/logouticon.png' width={25} height={25}></Image>
                     </ListItemIcon>
                     <ListItemText primary="Logout" />
                   </ListItemButton>
@@ -181,6 +182,6 @@ export default function MainNavigation({}) {
 
 const styles = {
   homelogo: "ml-auto",
-  applogo: 'text center flex justify-center w-full h-full text-red',
+  applogo: 'mr-1 pt-2 text center flex justify-center w-full h-full text-red',
   navbar: "flex h-[10vh] w-[100vw]"
 }

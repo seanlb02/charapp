@@ -25,6 +25,6 @@ export default function DesktopPopup() {
 }
 
 const styles = {
-    pageContainer: "h-[100vh] w-[100vw] bg-yellow-50 flex justify-center items-center align-center",
+    pageContainer: "z-40 h-full   w-[100vw] bg-yellow-50 flex justify-center items-center align-center",
     popup : "h-[50vh] w-[50vw] rounded-3xl bg-white flex flex-col justify-center align-center items-center"
 }

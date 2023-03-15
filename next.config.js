@@ -29,6 +29,17 @@ module.exports = {
   },
 }
 
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: 'http://localhost:8000/'
+      }
+    ]
+  }
+}
+
 module.exports = nextConfig
 
 module.exports = {

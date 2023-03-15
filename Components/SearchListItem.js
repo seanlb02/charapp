@@ -20,5 +20,6 @@ const router = useRouter;
 
 const styles = {
     container: "flex h-20 w-full border-b px-4 items-center gap-4 cursor-pointer",
-    profilePic: "rounded-full h-12 w-12"
+    profilePic: "rounded-full h-12 w-12",
+    userName: "text-xl"
 }

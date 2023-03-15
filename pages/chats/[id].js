@@ -7,8 +7,10 @@ import UserProfile from '../../Components/UserProfile.js'
 import FriendsList from '../../Components/FriendsList.js'
 import Sidenav from '../../Components/Sidenav.js'
 
-import Chatlist from '../../Components/Chatlist.js'
+import Chatbody from '../../Components/Chatbody'
 import ChatWindow from '../../Components/ChatWindow.js'
+import Footnav from '../../Components/Footnav.js'
+import Sideslide from '../../Components/Sideslide.js'
 
 export default function Chattree() {
 
@@ -16,15 +18,15 @@ export default function Chattree() {
   return (
     <>
       <div className={styles.pageContainer}>
-      <Sidenav/>
-      <ChatWindow/>
-      <Chatlist/>
+      <Sideslide/>
+      <Chatbody/>
+      <Footnav/>
       </div>
     </>
   )
 }
 
 const styles = {
-    pageContainer: "h-[100vh] flex w-[100vw] ",
+    pageContainer: "h-[100vh] flex flex-col w-[100vw] ",
     nav: "fixed bg-red-500s"
 }

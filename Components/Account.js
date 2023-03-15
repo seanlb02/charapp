@@ -4,7 +4,11 @@ import Image from "next/image";
 import Router, { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { fetchBranches } from "../Services/branch_services";
+import Userchats from './Userchats'; 
+import { getUserData } from "../Services/user_services";
 
+import Listitem from "./Listitem";
+import { userChats } from "../Services/chat_services";
 
 export default function Account() {
 
@@ -12,9 +16,9 @@ const router = useRouter();
 
 
 const [userdata, setUserdata] = useState ([])
+const [chatdata, setChatdata] = useState([])
 const datafeeder = []
 
-const [username, setUsername] = useState()
 const [bio, setBio] = useState()
 
 const [branches, setBranches] = useState([])
@@ -29,8 +33,10 @@ const upload = function(){
 
 useEffect(() => {
 
-
+  
 // get user data service/function
+getUserData().then((data) => setUserdata(data))
+userChats().then((data) => setChatdata(data));
 
   
 }, [])
@@ -42,26 +48,7 @@ const dropdownInput = function() {
 
 }
 
-// onSubmit:
-const postBranch = async function(e) {
-  e.preventDefault();
-  const token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-  const postContent = {vip_user: `${userdata.username}`, text: `${text}`, file_url: `${file_url}`, timestamp: new Date() }
 
-    const res = await fetch(`http://127.0.0.1:8000/branches/new/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}` 
-    },
-    body: JSON.stringify(postContent)
-    })
-    .then(res => res.json())
-    .then(data => console.log("branch posted"))
-    .catch((error) => {
-      console.error('Error:', error);
-      })
-}
 
   return (
     <div className={styles.profileContainer}>
@@ -75,22 +62,25 @@ const postBranch = async function(e) {
       <section className={styles.headerContainer}>
             <div className={styles.infoContainer}>
               <img className={styles.profilePic} src="https://i.pravatar.cc/300" height={70} width={70}/>
-              <div className={styles.userName}>username</div>
+              <div className={styles.userName}>{userdata.map(ob=>ob.username)}</div>
             </div>
             <div className={styles.bioContainer}>
-              <div className={styles.bio}> short bio goes here</div>
+              <div className={styles.bio}>{userdata.map(ob=>ob.bio)}</div>
             </div>
             <div className={styles.editbuttoncontainer}>
-                <Link className={styles.editbutton} href="/edit"><Image src="/editprofile.png" width={22} height={20}></Image>Edit</Link>
+                <Link className={styles.editbutton} href="/edit"><Image src="/editprofile.png" width={20} height={17}></Image>Edit</Link>
             </div>
       </section>
       
       <section className={styles.branchWindow}>
-        <div>hmr tst</div>
+        <Link href='/chat/createchat'><div className={styles.chatButton}>Start Chat</div></Link>
       </section>
-      <form>
+      <section className={styles.windowList}>
+      {chatdata.map(obj => <Listitem chatname={obj.chatname} members={obj.participants.map(el=><div>{el}</div>)}/>)}
+      </section>
+      {/* <form className="bg-blue-50">
         <input className={styles.input} placeholder="Type a message..."></input>
-      </form>
+      </form> */}
       
     </div>
   )
@@ -98,18 +88,19 @@ const postBranch = async function(e) {
 
 const styles = {
   profileContainer: " h-[80vh] w-[100vw] overflow-x-hidden flex flex-col ",
-    headerContainer: "h-auto  w-100%  border-b-2 border-slate-200",
-    branchWindow: " flex flex-col h-screen w-full overflow-y-scroll items-center border-t-2 ",
+    headerContainer: "h-auto  w-100%  border-b-1 border-slate-200",
+    branchWindow: "shadow flex flex-col h-auto w-full align-center justify-center items-center  border-t-2 ",
+    windowList: "overflow-y-scroll scrollbar-none",
     treeText: "text-slate-500 mt-12",
-    input: "rounded-xl p-2 w-[90vw] m-4 bg-slate-100",
+    input: " rounded-xl p-2 w-[90vw] m-4 mb-5 py-3 bg-slate-200",
     profilePic: "rounded-full",
     infoContainer: "w-5/5 ml-auto h-contain flex gap-5 items-center content-center ml-5 mt-0",
     userName: "text-3xl",
     addBranch: "flex items-center gap-1 cursor-pointer my-5 mb-5",
-    bioContainer: "w-4/5 ml-auto flex flex-col h-contain py-6 flex gap-2 ",
+    bioContainer: "w-4/5 mr-auto pl-6 flex flex-col h-contain py-6 flex gap-2 ",
     Location: "text-l text-slate-600",
     bio: "text-l",
-    editbutton: 'text-s border-2 rounded px-3 py-1 flex w-auto ml-4 mb-4 gap-2',
+    editbutton: 'flex text-xs align-center items-center border-2 rounded px-3 py-1 flex w-auto ml-4 mb-4 gap-2',
     editbuttoncontainer: 'flex w-auto',
     disclaimer: "text-xs pl-12 pb-0",
     postForm: "flex flex-col gap-5 w-4/5 bg-yellow-100 rounded-lg p-5 m-5 mx-5",
@@ -118,5 +109,6 @@ const styles = {
     postButton: "flex flex-end p-3 w-contain mt-5 bg-green-400 text-white rounded-lg mb-12",
     branchBubble: " break-words text-lg, h-contain py-5 px-5 w-4/5 mx-24 mb-12 bg-white rounded-md border-2",
     branchText: "flex break-words break-all text-md w-contain",
-    branchTime: "flex text-right text-sm"
+    branchTime: "flex text-right text-sm",
+    chatButton: "bg-blue-100 p-2 pb-3 rounded-full my-6 px-5"
 }

@@ -7,9 +7,16 @@ import FriendsList from '../Components/FriendsList.js'
 import Sidenav from '../Components/Sidenav.js'
 import Sideslide from '../Components/Sideslide.js'
 import Footnav from '../Components/Footnav.js'
+import { CheckTokenExpiration } from '../Services/token_services.js'
 
 
 export default function profile() {
+
+
+  useEffect(() => {
+
+    CheckTokenExpiration();
+  }, [])
 
   return (
 

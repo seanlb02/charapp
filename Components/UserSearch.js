@@ -6,52 +6,45 @@ import messages from '../public/messages.svg'
 import { useRouter } from 'next/router';
 import SearchListItem from './SearchListItem'
 
+import { searcher } from '../Services/user_services';
+
 export default function UserSearch() {
 
 const [user, setUser] = useState("");
 const [search, setSearch]  = useState("");
+const [invalid, setInvalid] = useState(false)
 
-const searchUser = function(e) {
+function searchUser(e) {
     e.preventDefault();
-    var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-
-    const res = 
-        fetch(`http://127.0.0.1:8000/users/search/${search}/`, {
-        method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+    setUser("")
+    setInvalid(false)
+    searcher(search)
+    .then((res) => {
+        if(res.error)
+        {setInvalid(true)}
+    
+        else {
+            setUser(res)
         }
-    })
-        .then((res) => res.json())
-        .then((data) => {
-        setUser(data.username);
-        // setUser(data.username)
-
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
-
+    }
+    )
+    // .then((data) => console.log(data))
 }
+        
 
   return (
     <>
     <div  className={styles.listheading}>Find </div>
     <div className ={styles.pageContainer}>
         <div className={styles.search}>
-            <form onSubmit={searchUser} className={styles.inputview}>
+            <form className={styles.inputview}>
                 <input type="text" value={search} onChange={(evt) => setSearch(evt.target.value)} className={styles.searchInput} name="Friendsearch" placeholder="Search users..."/>
-                <button type="submit" onClick={searchUser} className={styles.searchButton}><Image src="/searchIcon.png" width={25} height={25}></Image></button>
+                <button onClick={searchUser} className={styles.searchButton}><Image alt="search icon" src="/searchIcon.png" width={25} height={25}></Image></button>
             </form>
         </div>
-        {/* {user ? <SearchListItem name={user} link={`/user/${user}`}/> : <div></div>} */}
-        {user == undefined && <div>No results found, check your spelling.</div>}
-        {user &&
-           <SearchListItem name={user} link={`/user/${user}`}/>
-        }
-        {user == "" && <div></div>}
-    
+        {user !== "" ? <SearchListItem name={user[0].username} link={`/user/${user[0].username}`}/> : <div></div>}
+        {invalid ? <div>No results found, check your spelling.</div> : <></>}
+      
     </div> 
     </>
     )

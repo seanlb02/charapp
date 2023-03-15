@@ -23,7 +23,7 @@ export default function Branchlist () {
 return (
     <>
 <div className={styles.listheading}>
-                Branches
+                Following
         </div>
     <div className={styles.listContainer}>
         

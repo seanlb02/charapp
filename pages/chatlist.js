@@ -11,18 +11,43 @@ import Account from '../Components/Account.js'
 import BranchList from '../Components/BranchList.js'
 import Footnav from '../Components/Footnav.js'
 import Chatlist from '../Components/Chatlist'
+import DesktopPopup from '../Components/DesktopPopup'
 
 
 
 export default function branchlist() {
+
+    const [onMobile, SetonMobile] = useState(true);
+    const [screen, Setscreen] = useState("");
+  
+    useEffect(() => {
+        // window is accessible here.
+        console.log(window.innerWidth)
+        if (window.innerWidth < 600) {
+            SetonMobile(true)
+        }
+        else{SetonMobile(false)};
+        console.log(onMobile)
+        
+      }, []);
+  
+        if(typeof window !== "undefined"){
+          window.addEventListener("resize", function() {
+            if(window.innerWidth > 600){SetonMobile(false)}
+            else{SetonMobile(true)}
+          });
+      }
+    
     return (
     
+    onMobile == true ?
     <div className={styles.pageContainer}>
         <Sideslide className={styles.slider}/>
         <Chatlist className={styles.branchlist}/>
         <Footnav className={styles.footer}/>
   
     </div>
+     : <DesktopPopup/>
     
     )
 }

@@ -31,3 +31,31 @@ a {
     background: black;
   }
 }
+
+    /* this is the animation css for the text reel */
+    
+    
+    #cycle:after {
+      animation-name: cycle; 
+      animation-duration: 8s;
+      animation-iteration-count: infinite;
+      content: ""; 
+    }
+  
+  @keyframes cycle {
+    0% {
+      content: "chats";
+    }
+    25% {
+      content: "collabs";
+    }
+    50% {
+      content: "debates";
+    }
+    75% {
+        content: "interviews"
+    }
+    100% {
+      content: "chats";
+    }
+  }

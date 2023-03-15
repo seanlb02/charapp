@@ -8,9 +8,10 @@ import Navbar from '../Components/Navbar'
 import { useRouter } from 'next/router'
 import Sideslide from '../Components/Sideslide.js'
 import Account from '../Components/Account.js'
-import BranchList from '../Components/BranchList.js'
+import PeopleList from '../Components/PeopleList.js'
 import Footnav from '../Components/Footnav.js'
 import DesktopPopup from '../Components/DesktopPopup'
+import { CheckTokenExpiration } from '../Services/token_services'
 
 
 
@@ -21,6 +22,7 @@ export default function branchlist() {
     const [screen, Setscreen] = useState("");
   
     useEffect(() => {
+      CheckTokenExpiration();
         // window is accessible here.
         console.log(window.innerWidth)
         if (window.innerWidth < 600) {
@@ -43,7 +45,7 @@ export default function branchlist() {
     onMobile == true ?
     <div className={styles.pageContainer}>
         <Sideslide className={styles.slider}/>
-        <BranchList className={styles.branchlist}/>
+        <PeopleList className={styles.branchlist}/>
         <Footnav className={styles.footer}/>
   
     </div>
