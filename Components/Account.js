@@ -9,13 +9,19 @@ import { editBio, getUserData } from "../Services/user_services";
 
 import Listitem from "./Listitem";
 import { userChats } from "../Services/chat_services";
+import Spinner from "./Spinner";
 
-export default function Account() {
+
+
+
+export default function Account(props) {
+
+  
 
 const router = useRouter();
 
 
-const [userdata, setUserdata] = useState ([])
+const [userdata, setUserdata] = useState ()
 const [chatdata, setChatdata] = useState([])
 const datafeeder = []
 
@@ -59,7 +65,12 @@ const updateBio = function() {
 
 
   return (
+    <>
+    {userdata ?
+
     <div className={styles.profileContainer}>
+
+     
       <section className={styles.header}>
 
 
@@ -93,12 +104,15 @@ const updateBio = function() {
       {/* <form className="bg-blue-50">
         <input className={styles.input} placeholder="Type a message..."></input>
       </form> */}
-      
-    </div>
+    
+    </div> 
+    : <div className={styles.loadingContainer}><Spinner/></div>}
+    </>
   )
 }
 
 const styles = {
+  loadingContainer: "flex h-[82vh] w-[100vw] items-center overflow-x-hidden flex text-center flex-col bg-green-100 justify-center align-center",
   profileContainer: " h-[82vh] w-[100vw] overflow-x-hidden flex flex-col ",
     headerContainer: "h-auto  w-100%  border-b-1 border-slate-200",
     branchWindow: "shadow flex flex-col h-auto w-full align-center justify-center items-center border-t-2 ",

@@ -8,7 +8,8 @@ export async function getUserData(){
             'Authorization': `Bearer ${token}`,
             }
     });
-    return res.json();
+    const data = await res.json();
+    return data;
 }
 
 export async function getFollowing() {

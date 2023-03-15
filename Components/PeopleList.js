@@ -6,13 +6,14 @@ import React from 'react';
 import { useRouter } from 'next/router.js';
 import { getFollowing } from '../Services/user_services.js';
 import Peopleitem from './Peopleitem.js';
+import Spinner from './Spinner.js';
 
 
 export default function Branchlist () {
 
     const [ brancharray, setBranch ] = useState()
     const router = useRouter()
-    const [followers, setFollowers] = useState([]);
+    const [followers, setFollowers] = useState();
 
 useEffect(() => {
 
@@ -24,9 +25,12 @@ getFollowing().then((data) => setFollowers(data))
 
 return (
     <>
-<div className={styles.listheading}>
+    <div className={styles.listheading}>
                 Following
         </div>
+    { followers ? 
+    <>
+
     <div className={styles.listContainer}>
         
                 {followers.map(obj => obj.following.map(el => {return <Peopleitem username={el.username}/>}))}
@@ -38,10 +42,16 @@ return (
 
     </div>
     </>
+    :
+    <div className={styles.loadingContainer}><Spinner/></div>
+    }   
+    </>
 )
 }
 
 const styles = {
+    loadingContainer: "flex h-[82vh] w-[100vw] items-center overflow-x-hidden flex text-center flex-col bg-green-100 justify-center align-center",
+
     listContainer: 'h-[80vh] w-[100vw] overflow-x-hidden overflow-y-scroll flex flex-col',
     listItem: "flex gap-4 min-h-[10vh] items-center px-4 cursor-pointer",
     listheading: "text-2xl flex justify-center text-center pb-4 border-b-2",

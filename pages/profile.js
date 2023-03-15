@@ -9,6 +9,25 @@ import Sideslide from '../Components/Sideslide.js'
 import Footnav from '../Components/Footnav.js'
 import { CheckTokenExpiration } from '../Services/token_services.js'
 
+// export async function getServerSideProps() {
+//   var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
+//   const res = await fetch('http://localhost:5000/users/data',{
+//       method: 'GET',
+//       headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': `Bearer ${token}`,
+//           }
+//   });
+//   const data = await res.json();  
+
+//     return { 
+//       props: {
+//        userdata : data,
+//       }
+//     }
+    
+  
+//   }
 
 export default function profile() {
 

@@ -25,15 +25,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/chats/[id]": [
+    "/branchlist": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/chats/[id].js"
+      "static/chunks/pages/branchlist.js"
     ],
-    "/profile": [
+    "/user/[user]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/profile.js"
+      "static/chunks/pages/user/[user].js"
     ]
   },
   "ampFirstPages": []

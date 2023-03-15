@@ -8,20 +8,21 @@ import Userchats from './Userchats';
 import { chatData } from "../Services/chat_services";
 import { CheckTokenExpiration } from "../Services/token_services";
 import { addFavourite, getUserData } from "../Services/user_services";
+import Spinner from "./Spinner";
 
 export default function Account() {
 
 const router = useRouter();
 const chatname = router.query.id 
 
-const [userdata, setUserdata] = useState ([])
+const [userdata, setUserdata] = useState ()
 const datafeeder = []
 
 const [username, setUsername] = useState()
 const [bio, setBio] = useState()
 
 const [chatdata, setChatdata] = useState([])
-const [userData, setUserData] = useState([])
+const [userData, setUserData] = useState()
 
 const [name, setName] = useState([])
 
@@ -96,6 +97,8 @@ const renderTextbox = function() {
 
 
   return (
+    <>
+    { userData ?
     <div className={styles.profileContainer}>
       <section className={styles.header}>
 
@@ -136,10 +139,16 @@ const renderTextbox = function() {
    } */}
       
     </div>
+    :
+    <div className={styles.loadingContainer}><Spinner/></div>
+    }
+    </>
   )
 }
 
 const styles = {
+    loadingContainer: "flex h-[82vh] w-[100vw] overflow-x-hidden flex text-center flex-col bg-green-100 justify-center items-center align-center",
+
   profileContainer: " h-[82vh] w-[100vw] overflow-x-hidden flex flex-col ",
     headerContainer: "h-auto  w-100%  border-b-2 border-slate-200",
     branchWindow: " flex flex-col h-screen w-full align-center justify-center items-center  border-t-2 bg-blue-50",
