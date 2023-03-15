@@ -7,6 +7,7 @@ import { fetchBranches } from "../Services/branch_services";
 import Userchats from './Userchats'; 
 import { chatData } from "../Services/chat_services";
 import { CheckTokenExpiration } from "../Services/token_services";
+import { getUserData } from "../Services/user_services";
 
 export default function Account() {
 
@@ -20,6 +21,9 @@ const [username, setUsername] = useState()
 const [bio, setBio] = useState()
 
 const [chatdata, setChatdata] = useState([])
+const [userData, setUserData] = useState([])
+
+const [name, setName] = useState([])
 
 // message input stored here
 const [text, setText] = useState()
@@ -28,6 +32,10 @@ const upload = function(){
   router.push('/upload')
 }
 
+const [isMember, setIsMember] = useState(false);
+const [chatMembers, setChatMembers] = useState([])
+
+
 
 useEffect(() => {
 
@@ -35,8 +43,20 @@ useEffect(() => {
 // get user data service/function
 
     CheckTokenExpiration();
+    getUserData().then((data) => {setUserData(data[0].username)})
     if(router.isReady)
-    {chatData(router.query.id).then((data) => {setChatdata(data)})}
+    {chatData(router.query.id).then((data) => {setChatdata(data[0].participants); setName(data[0].chatname)})
+    // .then(() => setChatMembers(chatdata[0].participants))
+    // .then(() => console.log(chatdata[0].participants))}
+
+    }
+
+
+    // .then(() => console.log(chatdata[0].participants))
+    // .then(() => chatdata.map(el => {setChatMembers(el.participants)}))
+
+        // if (chatdata[0].participants.includes(`$userData}`)) {setIsMember(true)}
+    
 
 }, [router.isReady])
 
@@ -45,6 +65,31 @@ const dropdownInput = function() {
 
   setNewBranch(true)
 
+}
+console.log(JSON.stringify(userData))
+console.log(chatdata)
+
+// if(chatdata !== undefined) {
+//     chatdata.map(el => {setChatMembers([...chatMembers, el.participants])})
+// }
+
+// if(chatdata != undefined){
+// if (chatdata[0].includes(JSON.stringify(`${userData}`)))
+// {
+
+//     console.log("hey it works")
+// //      <form className="bg-blue-50">
+// //     <input className={styles.input} placeholder="Type a message..."></input>
+// //   </form>
+// //   :
+// //   <></>
+
+// }}
+
+// this is to get array of members in chat...
+
+const renderTextbox = function() {
+   chatdata.includes(JSON.stringify(userData)) ? <div>hey</div> : <div>shit</div>
 }
 
 // onSubmit:
@@ -60,20 +105,35 @@ const dropdownInput = function() {
       <section className={styles.headerContainer}>
             <div className={styles.infoContainer}>
               {/* <img className={styles.profilePic} src="https://i.pravatar.cc/300" height={70} width={70}/> */}
-              <div className={styles.userName}>{chatdata.map(obj => obj.chatname)}</div>
+              <div className={styles.userName}>{name}</div>
+              <div className={styles.favouritesButton}>Add to Favourites</div>
             </div>
+            
             <div className={styles.bioContainer}>
-              <div className={styles.bio}>{chatdata.map(obj => obj.participants.map(member => <div className={styles.memberTags} onClick={() => router.push(`/user/${member}`)}>{member}</div>))}</div>
+              <div className={styles.bio}>{chatdata.map(member => <div className={styles.memberTags} onClick={() => router.push(`/user/${member}`)}>{member}</div>)}</div>
             </div>
             
       </section>
       
       <section className={styles.branchWindow}>
       </section>
-    
-      <form className="bg-blue-50">
-        <input className={styles.input} placeholder="Type a message..."></input>
-      </form>
+      {chatdata.includes((userData)) ? 
+      
+            <form className="bg-blue-50">
+                <input className={styles.input} placeholder="Type a message..."></input>
+            </form> 
+
+            :
+
+            <></>}
+
+    {/* {renderTextbox} */}
+   {/* {chatdata[0].participants.includes(userData) ? 
+   
+      
+      :
+      <></>
+   } */}
       
     </div>
   )
@@ -86,7 +146,8 @@ const styles = {
     treeText: "text-slate-500 mt-12",
     input: " rounded-xl p-2 w-[90vw] m-4 mb-5 py-3 bg-slate-200",
     profilePic: "rounded-full",
-    infoContainer: "w-5/5 ml-auto h-contain flex gap-5 items-center content-center ml-5 mt-0",
+    favouritesButton: "w-fit py-1 bg-green-100 px-2 rounded-full text-sm border-1 border-slte-300 cursor-pointer",
+    infoContainer: "w-5/5 ml-auto h-contain flex flex-col gap-5 items-left content-center ml-5 mt-0",
     userName: "text-3xl",
     addBranch: "flex items-center gap-1 cursor-pointer my-5 mb-5",
     bioContainer: "w-5/5 mr-auto mx-3 flex flex-col h-contain py-6 flex gap-2 ",

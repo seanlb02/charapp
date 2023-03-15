@@ -4,7 +4,7 @@ import Image from "next/image";
 import {useState, useEffect} from 'react'
 import {useRouter} from 'next/router'
 import { CheckTokenExpiration } from '../Services/token_services';
-import { getFollowing, getUserData } from '../Services/user_services';
+import { getFollowers, getFollowing, getUserData } from '../Services/user_services';
 
 import Swal from 'sweetalert2';
 
@@ -27,7 +27,7 @@ export default function Createchat() {
       CheckTokenExpiration();
       setMembers([]);
       getUserData().then((data) => {data.map(obj => setMembers([...members, obj.username]))})
-      getFollowing().then((data) => {setFollowerNames(data)})
+      getFollowers().then((data) => {setFollowerNames(data)})
 
 
     },[])
@@ -80,24 +80,24 @@ const createChat = async function(e) {
           <div className={styles.header}>Users  (max. 5)</div>
           <select  className={styles.input} name="chat name"   onChange={evt => setMembers([...members, evt.target.value])}>
           <option className={styles.optionPlaceholder} value="" disabled selected hidden></option>
-            {followerNames.map(obj => obj.following.map(el => {return <option>{el.username}</option>}))}
+            {followerNames.map(obj => obj.followers.map(el => {return <option>{el.username}</option>}))}
           </select>
           <select  className={styles.input} name="chat name"  onChange={evt => setMembers([...members, evt.target.value])}>
           <option className={styles.optionPlaceholder} value="" disabled selected hidden></option>
-            {followerNames.map(obj => obj.following.map(el => {return <option>{el.username}</option>}))}
+            {followerNames.map(obj => obj.followers.map(el => {return <option>{el.username}</option>}))}
 
           </select>
           <select  className={styles.input} name="chat name" onChange={evt => setMembers([...members, evt.target.value])}>
           <option className={styles.optionPlaceholder} value="" disabled selected hidden></option>
-            {followerNames.map(obj => obj.following.map(el => {return <option>{el.username}</option>}))}
+            {followerNames.map(obj => obj.followers.map(el => {return <option>{el.username}</option>}))}
           </select>
           <select  className={styles.input} name="chat name"  onChange={evt => setMembers([...members, evt.target.value])}>
           <option className={styles.optionPlaceholder} value="" disabled selected hidden></option>
-            {followerNames.map(obj => obj.following.map(el => {return <option>{el.username}</option>}))}
+            {followerNames.map(obj => obj.followers.map(el => {return <option>{el.username}</option>}))}
           </select>
           <select  className={styles.input} name="chat name"  onChange={evt => setMembers([...members, evt.target.value])}>
           <option className={styles.optionPlaceholder} value="" disabled selected hidden></option>
-            {followerNames.map(obj => obj.following.map(el => {return <option>{el.username}</option>}))}
+            {followerNames.map(obj => obj.followers.map(el => {return <option>{el.username}</option>}))}
           </select>  
 
           <button onClick={createChat}>Create</button>

@@ -50,7 +50,7 @@ const registerUser = async function() {
     .then(() => Swal.fire({
       icon: 'success',
       title: 'Account Created!',
-      text: 'You can now sign in with your email address and password',
+      text: 'You can now sign in with your Username and Password',
       footer: ''
     }))
 }})}

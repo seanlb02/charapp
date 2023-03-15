@@ -45,3 +45,17 @@ export const userChats = async function() {
     });
     return res.json();
 }
+
+export const theirChats = async function(user) {
+    var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')));
+
+    const res = await fetch (`http://localhost:5000/chats/theirchats/${user}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        
+    });
+    return res.json();
+}

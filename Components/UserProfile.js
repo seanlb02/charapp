@@ -11,6 +11,9 @@ import { followUser } from "../Services/user_services";
 import { checkFollowing } from "../Services/user_services";
 import Spinner from "./Spinner";
 import { Troubleshoot } from "@mui/icons-material";
+import { theirChats } from "../Services/chat_services";
+
+import Listitem from "./Listitem";
 
 export default function UserProfile({name}) {
 
@@ -26,6 +29,8 @@ export default function UserProfile({name}) {
   
   const [onMobile, SetonMobile] = useState(true);
   const [screen, Setscreen] = useState("");
+
+  const [chatdata, setChatdata] = useState([])
 
   useEffect(() => {
       // window is accessible here.
@@ -48,6 +53,7 @@ export default function UserProfile({name}) {
   useEffect(() => {
     if (router.isReady){
       checkFollowing(username). then((data) => {setIsFollowing(data.message)})
+      theirChats(username).then((data) => {setChatdata(data)})
     };
   },[router.isReady])
 
@@ -68,12 +74,8 @@ export default function UserProfile({name}) {
       return <Spinner/>;
     }
     else if (isFollowing == true) {
-      return <Chatlist/>;
-    }
-    else if (isFollowing == false) {
-      return <div className={styles.followMe}>Follow this user to access their chats</div>;
-    }
-  }
+      return (chatdata.map(obj => <Listitem chatname={obj.chatname} members={obj.participants.map(el=><div>{el}</div>)}/>))
+    }}
 
   return (
 
@@ -92,7 +94,8 @@ export default function UserProfile({name}) {
           </div>
     </section>
     <section className={styles.treePreview}>
-      {renderChatlist()}
+      {isFollowing ? chatdata.map(obj => <Listitem chatname={obj.chatname} members={obj.participants.map(el=><div>{el}</div>)}/>) : <></>}
+      {/* {renderChatlist} */}
       {/* {isFollowing ? <Chatlist/> : <div className={styles.followMe}>Follow this user to access their chats</div>} */}
     </section>
     </div>
@@ -103,7 +106,7 @@ export default function UserProfile({name}) {
 const styles = {
   profileContainer: "overflow-y-scroll h-screen w-[100vw] flex flex-col ",
     headerContainer: "h-contain  w-100%  border-b-2 border-slate-200",
-    treePreview: " flex flex-col h-screen w-full px-5 justify-center align-center items-center border-t-2 ",
+    treePreview: " flex flex-col h-screen w-full px-5  items-left border-t-2 overflow-y-scroll scrollbar-none",
     treeText: "text-slate-500",
     profilePic: "rounded-full",
     infoContainer: "w-4/5 ml-5 h-contain flex gap-5 items-center content-center ",
@@ -111,7 +114,7 @@ const styles = {
     followingText: "text-black bg-white border-2 border-black ml-2 p-2 px-5 rounded-md",
     HiddenFollowingText: "hidden",
     followButtonDisappear: "hidden",
-    followButton: "bg-black text-white p-2 rounded-md px-5",
+    followButton: "cursor-pointer bg-black text-white p-2 rounded-md px-5",
     bioContainer: "w-4/5 ml-6 flex flex-col h-contain py-6 flex gap-2 ",
     Location: "text-l text-slate-600",
     bio: "text-l",

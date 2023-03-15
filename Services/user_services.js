@@ -23,6 +23,18 @@ export async function getFollowing() {
     return res.json();
 }
 
+export async function getFollowers() {
+    var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
+    const res = await fetch('http://localhost:5000/users/followers',{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            }
+    });
+    return res.json();
+}
+
 export async function followUser(username) {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
     const res = await fetch(`http://localhost:5000/users/follow/${username}`,{
@@ -59,4 +71,19 @@ export async function searcher(username) {
     return res.json();
 
     
+}
+
+export async function editBio(bio) {
+    var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
+    const body = { bio : `${bio}`}
+    const res = await fetch(`http://localhost:5000/users/edit`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            },
+        body: JSON.stringify(body)
+    })
+    return res.json();
+
 }
