@@ -10,6 +10,8 @@ import { CheckTokenExpiration } from "../Services/token_services";
 import { addFavourite, getUserData } from "../Services/user_services";
 import Spinner from "./Spinner";
 
+import { io } from 'socket.io-client'
+
 export default function Account() {
 
 const router = useRouter();
@@ -26,8 +28,7 @@ const [userData, setUserData] = useState()
 
 const [name, setName] = useState([])
 
-// message input stored here
-const [text, setText] = useState()
+
 
 const upload = function(){
   router.push('/upload')
@@ -36,6 +37,8 @@ const upload = function(){
 const [isMember, setIsMember] = useState(false);
 const [chatMembers, setChatMembers] = useState([])
 
+// message input stored here
+const [text, setText] = useState()
 
 
 useEffect(() => {
@@ -61,40 +64,38 @@ useEffect(() => {
 
 }, [router.isReady])
 
+const [socket, setSocket] = useState(null);
 
-const dropdownInput = function() {
+useEffect(() => {
 
-  setNewBranch(true)
+    setSocket(io("http://localhost:5000/"))
+    
 
+}, [])
+
+useEffect(() => {
+    if(socket) {
+    socket.on('returned-message', (data) => {
+        console.log(data)
+    })
 }
-console.log(JSON.stringify(userData))
-console.log(chatdata)
 
-// if(chatdata !== undefined) {
-//     chatdata.map(el => {setChatMembers([...chatMembers, el.participants])})
-// }
+}, [socket])
 
-// if(chatdata != undefined){
-// if (chatdata[0].includes(JSON.stringify(`${userData}`)))
-// {
 
-//     console.log("hey it works")
-// //      <form className="bg-blue-50">
-// //     <input className={styles.input} placeholder="Type a message..."></input>
-// //   </form>
-// //   :
-// //   <></>
+// console.log(JSON.stringify(userData))
+// console.log(chatdata)
 
-// }}
 
-// this is to get array of members in chat...
-
-const renderTextbox = function() {
-   chatdata.includes(JSON.stringify(userData)) ? <div>hey</div> : <div>shit</div>
-}
 
 // onSubmit:
-
+async function sendMessage(e) {
+    e.preventDefault();
+    socket.emit('send-message', {text});
+   
+        
+        
+};
 
   return (
     <>
@@ -122,8 +123,8 @@ const renderTextbox = function() {
       </section>
       {chatdata.includes((userData)) ? 
       
-            <form className="bg-blue-50">
-                <input className={styles.input} placeholder="Type a message..."></input>
+            <form onSubmit={sendMessage} className="bg-blue-50">
+                <input className={styles.input}  onChange={evt => setText(evt.target.value)} placeholder="Type a message..."></input>
             </form> 
 
             :
