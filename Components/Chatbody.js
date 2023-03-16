@@ -38,7 +38,7 @@ const [isMember, setIsMember] = useState(false);
 const [chatMembers, setChatMembers] = useState([])
 
 // message input stored here
-const [text, setText] = useState()
+const [text, setText] = useState("")
 
 
 useEffect(() => {
@@ -75,12 +75,14 @@ useEffect(() => {
 
 useEffect(() => {
     if(socket) {
-    socket.on('returned-message', (data) => {
-        console.log(data)
+    socket.on('returned-message', (message) => {
+        console.log(message)
     })
-}
+    if(chatname){
+    socket.emit('join-chat', {chatname});
+}}
 
-}, [socket])
+}, [socket, chatname])
 
 
 // console.log(JSON.stringify(userData))
@@ -91,7 +93,7 @@ useEffect(() => {
 // onSubmit:
 async function sendMessage(e) {
     e.preventDefault();
-    socket.emit('send-message', {text});
+    socket.emit('send-message', { text, chatname} );
    
         
         
