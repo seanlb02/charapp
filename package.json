@@ -21,16 +21,22 @@
     "hmr": "^0.1.0",
     "jest": "^29.3.1",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "next": "13.0.6",
     "next-images": "^1.8.4",
+    "next-pwa": "^5.6.0",
+    "next-with-workbox": "^3.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-loader-spinner": "^5.3.4",
+    "react-textarea-autosize": "^8.4.0",
     "react-toastify": "^9.1.1",
     "rooks": "^7.4.3",
+    "sharp": "^0.31.3",
     "socket.io-client": "^4.6.1",
     "styled-components": "^5.3.6",
-    "sweetalert2": "^11.6.16"
+    "sweetalert2": "^11.6.16",
+    "workbox-window": "^6.5.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

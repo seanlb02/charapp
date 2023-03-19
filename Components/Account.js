@@ -21,7 +21,7 @@ export default function Account(props) {
 const router = useRouter();
 
 
-const [userdata, setUserdata] = useState ()
+const [userdata, setUserdata] = useState ([])
 const [chatdata, setChatdata] = useState([])
 const datafeeder = []
 
@@ -114,8 +114,8 @@ const updateBio = function() {
 const styles = {
   loadingContainer: "flex h-[82vh] w-[100vw] items-center overflow-x-hidden flex text-center flex-col bg-green-100 justify-center align-center",
   profileContainer: " h-[82vh] w-[100vw] overflow-x-hidden flex flex-col ",
-    headerContainer: "h-auto  w-100%  border-b-1 border-slate-200",
-    branchWindow: "shadow flex flex-col h-auto w-full align-center justify-center items-center border-t-2 ",
+    headerContainer: "h-auto  w-100%  border-b-2 border-slate-300",
+    branchWindow: "shadow-sm flex flex-col h-auto w-full align-center justify-center items-center  ",
     windowList: "overflow-y-scroll scrollbar-none ",
     treeText: "text-slate-500 mt-12",
     editbio: "p-1 rounded-full px-2 text-sm border-2 border-slate-200",

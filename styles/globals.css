@@ -59,3 +59,29 @@ a {
       content: "chats";
     }
   }
+
+
+  #cycle2:after {
+    animation-name: cycle; 
+    animation-duration: 5.5s;
+    animation-iteration-count: infinite;
+    content: ""; 
+  }
+
+@keyframes cycle {
+  0% {
+    content: "chat";
+  }
+  25% {
+    content: "collab";
+  }
+  50% {
+    content: "debate";
+  }
+  75% {
+      content: "interview"
+  }
+  100% {
+    content: "chat";
+  }
+}

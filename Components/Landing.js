@@ -60,7 +60,7 @@ export default function Landing() {
                 <form onSubmit={getToken} className={styles.form}>
                         <div>{notify}</div>
                         <input type="text" className={styles.input} name="email"  placeholder="Username" onChange={evt => setUsername(evt.target.value)}/>
-                        <input type="text" className={styles.input} name="password"  placeholder="Password" onChange={evt => setPassword(evt.target.value)}/>
+                        <input type="password" className={styles.input} name="password"  placeholder="Password" onChange={evt => setPassword(evt.target.value)}/>
                     
                 <div className={styles.formButtons}>
                         <div type="submit" onClick={getToken} className={styles.Button}><button>Log In</button></div>

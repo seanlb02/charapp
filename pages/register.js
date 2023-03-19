@@ -18,6 +18,7 @@ export default function Register() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [password2, setPassword2] = useState("");
   const [phonenumber, setPhonenumber] = useState("")
   const [age, setAge] = useState("")
   const [countrycode, setCountrycode] = useState("")
@@ -31,8 +32,10 @@ export default function Register() {
   // make post to the backend and store user in db:
 
 const registerUser = async function() {
+  if (password !== password2) {setNotify("Passwords do not match"); return}
+  if (!email.includes("@", ".")) {setNotify("Email address is not valid"); return}
 
-  const res = await fetch('http://localhost:5000/auth/register', {
+  const res = await fetch('https://chatapi-production.up.railway.app/auth/register', {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json',
@@ -67,9 +70,9 @@ const registerUser = async function() {
                     <input type="text" className={styles.input} name="username"  placeholder="Username" maxlength="12" onChange={evt => setUsername(evt.target.value)}/>
                     <div className={styles.disclaimer}>(maximum 20 characters)</div>
                     <input type="text" className={styles.input} name="email"  placeholder="Email Address" onChange={evt => setEmail(evt.target.value)}/>
-                    <input type="text" className={styles.input} name="password"  placeholder="Password" onChange={evt => setPassword(evt.target.value)}/>
+                    <input type="password" className={styles.input} name="password"  placeholder="Password" onChange={evt => setPassword(evt.target.value)}/>
                     <div className={styles.disclaimer}>(minimum 8 characters)</div>
-                    <input type="text" className={styles.input} name="Retype password"  placeholder="Retype Password"/>
+                    <input type="password" className={styles.input} name="Retype password"  placeholder="Retype Password" onChange={evt => setPassword2(evt.target.value)}/>
                     <input type="text" className={styles.input} name="age"  placeholder="Date of Birth [YYYY-MM-DD] " onChange={evt => setAge(evt.target.value)}/>
                     <div className={styles.disclaimer}>(users must be over 13 years)</div>
                     <div className={styles.numberContainer}>

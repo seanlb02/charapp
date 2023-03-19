@@ -5,7 +5,7 @@ const array = members.filter((el) => el != "undefined")
 const body = {chatname: `${chatname}`, members: array}
 var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
 
-    const res = await fetch ('http://localhost:5000/chats/create', {
+    const res = await fetch ('https://chatapi-production.up.railway.app/chats/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
 export const chatData = async function(chatname) {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')));
 
-        const res = await fetch (`http://localhost:5000/chats/chatdata/${chatname}`, {
+        const res = await fetch (`https://chatapi-production.up.railway.app/chats/chatdata/${chatname}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const chatData = async function(chatname) {
 export const userChats = async function() {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')));
 
-    const res = await fetch (`http://localhost:5000/chats/userchats`, {
+    const res = await fetch (`https://chatapi-production.up.railway.app/chats/userchats`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const userChats = async function() {
 export const theirChats = async function(user) {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')));
 
-    const res = await fetch (`http://localhost:5000/chats/theirchats/${user}`, {
+    const res = await fetch (`https://chatapi-production.up.railway.app/chats/theirchats/${user}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -58,4 +58,18 @@ export const theirChats = async function(user) {
         
     });
     return res.json();
+}
+
+export const getMessages = async function(chat) {
+    var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')));
+    const res = await fetch (`https://chatapi-production.up.railway.app/chats/messages/${chat}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        
+    });
+    return res.json();
+
 }

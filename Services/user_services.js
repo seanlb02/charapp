@@ -1,7 +1,7 @@
 
 export async function getUserData(){
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-    const res = await fetch('http://localhost:5000/users/data',{
+    const res = await fetch('https://chatapi-production.up.railway.app/users/data',{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ export async function getUserData(){
 
 export async function getFollowing() {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-    const res = await fetch('http://localhost:5000/users/following',{
+    const res = await fetch('https://chatapi-production.up.railway.app/users/following',{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export async function getFollowing() {
 
 export async function getFollowers() {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-    const res = await fetch('http://localhost:5000/users/followers',{
+    const res = await fetch('https://chatapi-production.up.railway.app/users/followers',{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getFollowers() {
 
 export async function followUser(username) {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-    const res = await fetch(`http://localhost:5000/users/follow/${username}`,{
+    const res = await fetch(`https://chatapi-production.up.railway.app/users/follow/${username}`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export async function followUser(username) {
 
 export async function checkFollowing(username) {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-    const res = await fetch(`http://localhost:5000/users/checkfollowing/${username}`,{
+    const res = await fetch(`https://chatapi-production.up.railway.app/users/checkfollowing/${username}`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export async function checkFollowing(username) {
 
 export async function searcher(username) {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-    const res = await fetch(`http://localhost:5000/users/search/${username}`,{
+    const res = await fetch(`https://chatapi-production.up.railway.app/users/search/${username}`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export async function searcher(username) {
 export async function editBio(bio) {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
     const body = { bio : `${bio}`}
-    const res = await fetch(`http://localhost:5000/users/edit`,{
+    const res = await fetch(`https://chatapi-production.up.railway.app/users/edit`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export async function editBio(bio) {
 
 export async function addFavourite(chatname) {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-    const res = await fetch(`http://localhost:5000/users/favourite/new/${chatname}`,{
+    const res = await fetch(`https://chatapi-production.up.railway.app/users/favourite/new/${chatname}`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ export async function addFavourite(chatname) {
 
 export async function getFavourites() {
     var token = (JSON.parse(localStorage.getItem("tokenKey").replaceAll("", '')))
-    const res = await fetch(`http://localhost:5000/users/favourites/get/`,{
+    const res = await fetch(`https://chatapi-production.up.railway.app/users/favourites/get/`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

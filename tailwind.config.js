@@ -39,6 +39,7 @@ module.exports = {
       fontFamily: {
         'merriweather': ['Mereiweather', 'serif'],
         'roboto': ['Roboto', 'sans-serif'],
+        'web': ['Titillium Web', 'sans-serif']
       }
     },
   },

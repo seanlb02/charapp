@@ -92,21 +92,23 @@ export default function MainNavigation({}) {
             aria-label="open drawer"
             onClick={toggleDrawer(true)}
             sx={{
-              mr: 2,
+              mr: 0,
               display: {
                 xs: "block",
                 sm: "none"
               }
             }}
           >
-            <MenuIcon style={{fill: "black"}}/>
+                            <Image src="/hamburger.png" width={25} height={25}></Image>
+
+            {/* <MenuIcon style={{fill: "black"}}/> */}
           </IconButton>
-          <div className={styles.applogo}><Image src="/logochat.svg" width={50} height={50}></Image>
+          <div className={styles.applogo}><Image src="/logochat.svg" width={52} height={52}></Image>
         </div>
          {/* conditionally render the home button to access logged in VIP profile */}
           {isVip == true ? 
               <Link href="/profile"><div className={styles.homelogo}>          
-                <Image src="/home.png" width={45} height={45}></Image>
+                <Image src="/home.png" width={40} height={40}></Image>
               </div></Link>
               :
               <div></div>
@@ -182,6 +184,6 @@ export default function MainNavigation({}) {
 
 const styles = {
   homelogo: "ml-auto",
-  applogo: 'mr-1 pt-2 text center flex justify-center w-full h-full text-red',
+  applogo: ' pt-2 text center flex justify-center w-full h-full text-red',
   navbar: "flex h-[10vh] w-[100vw]"
 }

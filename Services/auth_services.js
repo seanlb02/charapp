@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 export async function Login(username, password) {
     const AuthBody = { usr: `${username}`, pwd: `${password}`}
     const res = await
-        fetch('http://localhost:5000/auth/login', {
+        fetch('https://chatapi-production.up.railway.app/auth/login', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
